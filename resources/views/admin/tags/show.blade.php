@@ -11,7 +11,7 @@
                     <div class="d-flex align-items-center">
                         <label for="title" class="form-label mt-2">Name</label>
                         <input type="text" class="mx-2 w-50 form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Inserisci il nome" value="{{old('name')}}">
-                        <button type="submit" class="btn btn-warning">Modifica Categoria</button>
+                        <button type="submit" class="btn btn-warning">Modifica Tag</button>
                     </div>
                     @error('name')
                         <div class="alert alert-danger w-50 p-1 ml-5">{{ $message }}</div>
@@ -22,7 +22,7 @@
                     <form action="{{route("tags.destroy", $tag->id)}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="sumbit" class="btn btn-danger">Elimina Categoria</button>
+                        <button type="sumbit" class="btn btn-danger">Elimina Tag</button>
                     </form>
                 </div>
             </div>

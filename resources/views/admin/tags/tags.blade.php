@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card-header mb-4">
-                <a href="{{route('tags.create')}}"><button type="button" class="btn btn-success">Crea Categoria</button></a>
+                <a href="{{route('tags.create')}}"><button type="button" class="btn btn-success">Crea Tag</button></a>
             </div>
             <div class="card-header">
                 <span>Categories</span>

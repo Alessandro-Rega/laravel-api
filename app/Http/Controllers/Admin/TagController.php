@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TagController extends Controller
 {
@@ -27,7 +28,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.tags.create');
     }
 
     /**
@@ -38,7 +39,19 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "name" => "required|string|max:50|unique:tags,name",
+        ]);
+
+        $data = $request->all();
+
+        $newTag = new Tag();
+        $newTag->name = $data['name'];
+        $newTag->slug = Str::of($newTag->name)->slug('-');
+
+        $newTag->save();
+
+        return redirect()->route("tags.index");
     }
 
     /**
@@ -72,7 +85,18 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $request->validate([
+            "name" => "required|string|max:50|unique:tags,name",
+        ]);
+
+        $data = $request->all();
+
+        $tag->name = $data['name'];
+        $tag->slug = Str::of($tag->name)->slug('-');
+
+        $tag->save();
+
+        return redirect()->route("tags.show", $tag->id);
     }
 
     /**
@@ -83,6 +107,8 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+
+        return redirect()->route('tags.index');
     }
 }
